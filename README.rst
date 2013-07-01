@@ -16,8 +16,8 @@ How to
 -------------
 
 Clone IPyDocker repo on the physical machines you want to use as workers and execute the command below. 
-This will prepare a Docker virtual machine with some preinstalled libraries
-(modify Dockerfile if you wish to have other libraries).
+This will prepare a Docker virtual machine with some preinstalled libraries (numpy, scipy, scikit-learn... ).
+Modify Dockerfile if you wish to have other libraries.
 ::
 	docker build -t krop-img .
 
@@ -25,7 +25,7 @@ Create IPython profile on a controller machine:
 ::
 	ipython profile create --parallel --profile=ssh
 
-Go into .ipython/profile_ssh and set the controller IP in ipcontroller_config.py:
+Go into *.ipython/profile_ssh* and set the controller IP in *ipcontroller_config.py*:
 :: 
 	HubFactory.ip = '192.168.1.14'
 
@@ -37,24 +37,26 @@ Prepare worker machines - execute the following command to start the Docker cont
 ::
 	docker run -d krop-img
 
-Copy ipcontroller-engine.json from .ipython/profile_ssh/security to the workers. For example (you can see the port number if you execute docker ps):
+Copy *ipcontroller-engine.json* from *.ipython/profile_ssh/security* to the workers. For example (you can see the port number if you execute docker ps):
 ::
-	scp -P 49185 ipcontroller-engine.json root@192.168.1.14://root/
+	scp -P 49185 ipcontroller-engine.json root@192.168.1.15://root/
 
 Connect to workers (the password is krop - see the Dockerfile where it is set):
 ::
 
-	ssh root@192.168.1.14 -p 49185
+	ssh root@192.168.1.15 -p 49185
 
 Start one or more ipengines on each worker:
 ::
 	ipengine --file=/root/ipcontroller-engine.json
 
-Now you can delegate tasks from the controller machine:
+Now you can delegate tasks to workers from the controller machine:
 ::
 	from IPython.parallel import Client
 	c = Client(profile="ssh")
-	print c.ids
+	# print out the ids of the ipengines on worker machines:
+	print c.ids 
+	# execute some dummy command inside every ipengine:
 	c[:].apply_sync(lambda : "Hello World")
 
 
