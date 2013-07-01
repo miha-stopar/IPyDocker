@@ -16,7 +16,7 @@ How to
 -------------
 
 Clone IPyDocker repo on the physical machines you want to use as workers and execute the command below. 
-This will prepare a Docker virtual machine with some preinstalled libraries (numpy, scipy, scikit-learn... ).
+This will prepare a Docker virtual machine with some preinstalled libraries (numpy, scipy, scikit-learn...).
 Modify Dockerfile if you wish to have other libraries.
 ::
 	docker build -t krop-img .
@@ -37,7 +37,7 @@ Prepare worker machines - execute the following command to start the Docker cont
 ::
 	docker run -d krop-img
 
-Copy *ipcontroller-engine.json* from *.ipython/profile_ssh/security* to the workers. For example (you can see the port number if you execute docker ps):
+Copy *ipcontroller-engine.json* from *.ipython/profile_ssh/security* to the workers. You can see the port number if you execute docker ps.
 ::
 	scp -P 49185 ipcontroller-engine.json root@192.168.1.15://root/
 
