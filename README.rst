@@ -2,14 +2,17 @@
 IPyDocker
 ===========
 
-IPyDocker aims to provide scripts to simplify Python parallelization tasks. It uses `Docker <http://www.docker.io/>`_ containers and `IPython <http://ipython.org/>`_ parallelization capabilities.
+IPyDocker aims to (even further) simplify Python parallelization tasks. It uses `Docker <http://www.docker.io/>`_ containers and `IPython <http://ipython.org/>`_ parallelization capabilities.
+
+.. image:: https://raw.github.com/miha-stopar/IPyDocker/master/ipydocker.png
+
 
 Why
 -------------
 
-This approach is about having IPython ipcontroller on one machine and IPython ipengines inside Docker Linux containers which are hosted on physical worker machines. 
+This approach is about having IPython ipcontroller on one machine and IPython ipengine instances inside Docker Linux containers on some further physical machines. 
 Docker containers can be hosted on the same machine as controller too, 
-but it doesn't make any sense as this implies an unneeded overhead - you can simply use IPython without Docker for such setup. 
+but it doesn't make any sense as this implies an unneeded overhead - you can simply use IPython without Docker for such a setup. 
 However, if you would like to exploit IPython parallelization capabilities using more than one physical machine, you can use Docker containers to simplify the configuration and to isolate the worker environment.
 
 How to
@@ -56,7 +59,7 @@ Now you can delegate tasks to workers from the controller machine:
 	c = Client(profile="ssh")
 	# print out the ids of the ipengines on worker machines:
 	print c.ids 
-	# execute some dummy command inside every ipengine:
+	# execute some dummy command inside each ipengine:
 	c[:].apply_sync(lambda : "Hello World")
 
 
