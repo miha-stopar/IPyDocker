@@ -8,13 +8,19 @@ RUN apt-get update
 RUN apt-get upgrade
 
 RUN apt-get install -y python-numpy python-scipy python-matplotlib ipython ipython-notebook python-pandas python-sympy python-nose
+RUN apt-get install -y python-setuptools
+RUN easy_install pip
+RUN pip install requests
 
 RUN apt-get install -y openssh-server supervisor
 ADD sshd.conf /etc/supervisor/conf.d/sshd.conf
 RUN mkdir -p /var/run/sshd
 RUN echo root:krop | chpasswd
 EXPOSE 22
-CMD /usr/bin/supervisord -n # this works when running docker as a daemon, however CMD seems to not be executed when running docker interactively
+
+# the following command works when running docker as a daemon, but it doesn't when running docker interactively:
+CMD /usr/bin/supervisord -n 
+
 
 
 

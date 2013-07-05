@@ -2,7 +2,7 @@
 IPyDocker
 ===========
 
-IPyDocker aims to (even further) simplify Python parallelization tasks. It uses `Docker <http://www.docker.io/>`_ containers and `IPython <http://ipython.org/>`_ parallelization capabilities.
+IPyDocker aims to (further) simplify Python parallelization tasks. It uses `Docker <http://www.docker.io/>`_ containers and `IPython <http://ipython.org/>`_ parallelization capabilities.
 
 .. image:: https://raw.github.com/miha-stopar/IPyDocker/master/ipydocker.png
 
@@ -12,7 +12,7 @@ Why
 
 This approach is about having IPython ipcontroller on one machine and IPython ipengine instances inside Docker Linux containers on some further physical machines. 
 Docker containers can be hosted on the same machine as controller too, 
-but it doesn't make any sense as this implies an unneeded overhead - you can simply use IPython without Docker for such a setup. 
+but it doesn't make any sense as this implies unneeded overhead - you can simply use IPython without Docker for such a setup. 
 However, if you would like to exploit IPython parallelization capabilities using more than one physical machine, you can use Docker containers to simplify the configuration and to isolate the worker environment.
 
 How to
@@ -23,6 +23,10 @@ This will prepare a Docker virtual machine with some preinstalled libraries (num
 Modify Dockerfile if you wish to have other libraries.
 ::
 	docker build -t krop-img .
+
+If some problems appear when building the following command executed on host might help:
+::
+	sysctl -w net.ipv4.ip_forward=1
 
 Create IPython profile on a controller machine:
 ::
