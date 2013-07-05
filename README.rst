@@ -24,7 +24,7 @@ Modify Dockerfile if you wish to have other libraries.
 ::
 	docker build -t krop-img .
 
-If some problems appear when building the following command executed on host might help:
+If some problems appear when building, the following command executed on host might help:
 ::
 	sysctl -w net.ipv4.ip_forward=1
 
