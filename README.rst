@@ -40,7 +40,7 @@ Prepare worker machines - execute the following command to start the Docker cont
 ::
 	docker run -d krop-img
 
-Copy *ipcontroller-engine.json* from *.ipython/profile_profile/security* to the workers. You can see the port number if you execute docker ps.
+Copy *ipcontroller-engine.json* from *.ipython/profile_myprofile/security* to the workers. You can see the port number if you execute docker ps.
 ::
 	scp -P 49185 ipcontroller-engine.json root@192.168.1.15://root/
 
